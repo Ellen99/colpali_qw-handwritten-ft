@@ -28,7 +28,13 @@ Follow these steps to set up your environment and install the necessary packages
 
 This project uses the **IAM Handwriting Database**.
 
-- **Dataset Structure**:
+
+The IAM dataset files required for this project are available under the Releases section of this repository.
+- Go to the Releases page.
+- Download the dataset archive (e.g., IAM.zip).
+- Extract the contents.
+Place the extracted data/IAM/ folder inside the project root directory.
+
 extract IAM.zip
   - `data/IAM/lines/` — contains individual handwritten text line images.
   - `data/IAM/ascii/lines.txt` — metadata file containing the transcription for each image.
