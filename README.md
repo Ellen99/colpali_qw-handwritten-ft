@@ -29,13 +29,9 @@ Follow these steps to set up your environment and install the necessary packages
 This project uses the **IAM Handwriting Database**.
 
 - **Dataset Structure**:
+extract IAM.zip
   - `data/IAM/lines/` — contains individual handwritten text line images.
   - `data/IAM/ascii/lines.txt` — metadata file containing the transcription for each image.
-
-- **Important Notes**:
-  - Each image filename corresponds to an entry in `lines.txt`.
-  - The transcriptions use `|` characters to represent spaces between words, which are replaced with normal spaces during parsing.
-  - Some entries may be incomplete or refer to missing images; those are skipped automatically during dataset parsing.
 
 - **Dataset Processing**:
   - Images are loaded in **grayscale**.
@@ -51,10 +47,14 @@ project-root/
 │       ├── lines/          # Handwritten line images
 │       └── ascii/
 │           └── lines.txt   # Transcriptions and metadata
-├── scripts/
-│   ├── datasets.py         # Dataset class (IAMDataset)
-│   └── your_notebook.ipynb # Example usage and visualization
-└── README.md               # (this file)
+│   └── RIMES/   #TODO
+
+├── data_collection/
+│   ├── datasets.py         # Dataset class (IAMDataset, RIMESDataset to be added later)
+│   └── use_IAM.ipynb # Example usage and visualization
+├── colnomic_inference.ipynb  # example inference of image and text for the model we want to fine tune
+└── README.md
+
 ```
 
 ## Quick Start
