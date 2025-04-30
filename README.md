@@ -29,9 +29,9 @@ Follow these steps to set up your environment and install the necessary packages
 This project uses the **IAM Handwriting Database**.
 
 
-The IAM dataset files required for this project are available under the Releases section of this repository.
+The IAM and LAM dataset files required for this project are available under the Releases section of this repository.
 - Go to the Releases page.
-- Download the dataset archive (e.g., IAM.zip).
+- Download the dataset archives (e.g., IAM.zip, LAM.zip).
 - Extract the contents.
 Place the extracted data/IAM/ folder inside the project root directory.
 

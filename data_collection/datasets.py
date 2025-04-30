@@ -1,4 +1,6 @@
 import os
+import json
+import csv
 from PIL import Image
 from torch.utils.data import Dataset
 from torchvision import transforms
@@ -40,3 +42,52 @@ class IAMDataset(Dataset):
             img = self.transform(img)
         text = self.transcriptions[idx]
         return img, text
+
+
+def load_queries(queries_jsonl):
+    """Return list[dict] from lam_queries.jsonl."""
+    with open(queries_jsonl, encoding="utf-8") as f:
+        return [json.loads(line) for line in f]
+
+class LAMQueryDataset(Dataset):
+    """
+    PyTorch-style dataset that iterates over query records and,
+    optionally, loads the corresponding page image.
+
+    Args
+    ----
+    queries_jsonl : str
+        Path to lam_queries.jsonl
+    load_images   : bool
+        If True, __getitem__ returns a PIL.Image as first element.
+        If False, it returns None instead (faster when encoding text only).
+    transform     : callable or None
+        Optional torchvision transform applied to each image.
+    """
+
+    def __init__(self, queries_jsonl, load_images=True, transform=None):
+
+        self.records = load_queries(queries_jsonl)
+        self.load_images = load_images
+        self.transform = transform
+
+    def __len__(self):
+        return len(self.records)
+
+    def __getitem__(self, idx):
+        rec = self.records[idx]
+
+        img = None
+        if self.load_images:
+            img = Image.open(rec["image_path"]).convert("RGB")
+            if self.transform:
+                img = self.transform(img)
+
+        return {
+            "image": img,                 # PIL.Image or None
+            "query_id": rec["id"],
+            "query": rec["query"],
+            "answer": rec["answer"],
+            "doc_id": rec["doc_id"],
+            "image_path": rec["image_path"],
+        }
